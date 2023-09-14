@@ -70,10 +70,31 @@ def heap_sort(arr):
         if largest != i:
             data[i], data[largest] = data[largest], data[i]
             down_heap(data, largest, n)
+
     n = len(arr)
-    for i in range((n-1)//2, -1, -1):
+    for i in range((n - 1) // 2, -1, -1):
         down_heap(arr, i, n)
-    for i in range(n-1, 0, -1):
+    for i in range(n - 1, 0, -1):
         arr[i], arr[0] = arr[0], arr[i]
         down_heap(arr, 0, i)
 
+
+def quick_sort(arr):
+    def partition(data, left, right):
+        pivot = right
+        i = left 
+        for j in range(left,right):
+            if arr[j] <= arr[pivot]:
+                arr[i], arr[j] = arr[j], arr[i]
+                i+=1
+        arr[i], arr[pivot] = arr[pivot], arr[i]
+        return i
+            
+    def qsort(data, left, right):
+        if left < right:
+            j = partition(data, left, right)
+            qsort(data, left, j - 1)
+            qsort(data, j + 1, right)
+
+    qsort(arr, 0, len(arr) - 1)
+    
